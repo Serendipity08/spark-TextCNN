@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>情绪礼物 - 创作端</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="./assets/css/base.css">
+  <link rel="stylesheet" href="./assets/css/creator.css">
+</head>
+<body>
+  <main class="container">
+    <header class="header">
+      <h1 class="title">情绪礼物</h1>
+      <p class="subtitle">把你想说的话好好送出去</p>
+    </header>
+
+    <section class="card">
+      <div class="input-group" id="text-input">
+        <div class="select-grid">
+          <div class="select-field">
+            <label class="label label-inline" for="recipient-type">发送对象</label>
+            <select id="recipient-type">
+              <option value="NONE" selected>无</option>
+              <option value="FAMILY">家人</option>
+              <option value="CLASSMATE">同学</option>
+              <option value="FRIEND">朋友</option>
+              <option value="LOVER">爱人</option>
+              <option value="OTHER">其他</option>
+            </select>
+          </div>
+          <div class="select-field">
+            <label class="label label-inline" for="blessing-preset">祝福语</label>
+            <select id="blessing-preset">
+              <option value="NONE" selected>无</option>
+              <option value="BIRTHDAY">生日快乐</option>
+              <option value="FESTIVAL">节日快乐</option>
+              <option value="THANKS">感谢</option>
+              <option value="CONGRATS">祝贺</option>
+            </select>
+          </div>
+        </div>
+        <div id="template-panel" class="template-panel">
+          <div class="template-head">
+            <div class="label">模板</div>
+          </div>
+          <div id="template-list" class="template-list"></div>
+          <div id="template-empty" class="template-empty hidden">暂无匹配模板</div>
+        </div>
+        <div class="input-header">
+          <label class="label" for="text-content">祝福内容</label>
+          <div class="voice-inline">
+            <button id="record-btn" class="record-btn" type="button">
+              <span class="record-dot" aria-hidden="true"></span>
+              <span class="record-label">按住说话</span>
+            </button>
+            <span id="record-timer" class="timer">00:00</span>
+          </div>
+        </div>
+        <div class="voice-tip">按住说话，松开自动识别（建议说 5 秒以上）</div>
+        <textarea id="text-content" placeholder="写下你想说的话，或按住语音输入"></textarea>
+        <div id="input-hints" class="input-hints"></div>
+        <button id="example-btn" class="link-btn" type="button">填入示例</button>
+      </div>
+
+      <button id="polish-btn" class="primary-btn" type="button">AI 轻润色</button>
+      <div id="polish-status" class="polish-status"></div>
+      <div id="candidates" class="candidates"></div>
+    </section>
+
+    <section class="card">
+      <div class="label">选择情绪场景</div>
+      <div class="scenes">
+        <button class="scene selected" data-vibe="warm" type="button">温暖</button>
+        <button class="scene" data-vibe="calm" type="button">安静</button>
+        <button class="scene" data-vibe="power" type="button">有力量</button>
+      </div>
+    </section>
+
+    <section id="music-section" class="card">
+      <div class="music-header">
+        <div>
+          <div class="label">选择背景音乐</div>
+          <div id="music-selected" class="music-selected hidden"></div>
+        </div>
+        <div class="music-search">
+          <input id="music-query" type="text" placeholder="输入音乐风格或关键词，如：轻柔、lofi、摇滚">
+          <button id="music-search-btn" class="ghost-btn" type="button">搜索</button>
+        </div>
+      </div>
+      <div id="music-results" class="music-results">
+        <div class="music-empty">输入关键词后点击搜索，最多展示 3 条结果</div>
+      </div>
+    </section>
+
+    <button id="generate-btn" class="primary-btn wide" type="button">生成预览</button>
+
+    <section id="preview" class="preview hidden">
+      <div class="preview-title">礼物预览</div>
+      <div class="preview-card">
+        <p id="preview-message" class="preview-message"></p>
+        <div class="preview-meta">
+          <span id="preview-scene" class="preview-scene"></span>
+          <span id="preview-start" class="preview-start"></span>
+        </div>
+      </div>
+      <div class="preview-tts">
+        <div class="tts-header">
+          <div class="label">语音预览</div>
+          <button id="tts-generate" class="ghost-btn small" type="button">生成语音</button>
+        </div>
+        <div id="tts-status" class="tts-status">生成语音后可试听</div>
+        <div id="tts-player" class="tts-player hidden">
+          <button id="tts-play" class="tts-play" type="button">
+            <span class="tts-play-label">播放</span>
+          </button>
+          <div id="tts-bar" class="tts-bar">
+            <div id="tts-progress" class="tts-progress"></div>
+          </div>
+          <div id="tts-time" class="tts-time">00:00 / 00:00</div>
+        </div>
+        <audio id="tts-audio" class="tts-audio" preload="auto"></audio>
+      </div>
+      <div class="preview-actions">
+        <button id="refresh-preview" class="ghost-btn" type="button">更新预览</button>
+        <button id="change-scene" class="ghost-btn" type="button">更换场景</button>
+        <button id="re-polish" class="ghost-btn" type="button">重新润色</button>
+        <button id="confirm-generate" class="primary-btn" type="button">确认生成</button>
+      </div>
+    </section>
+
+    <section id="result" class="result hidden">
+      <div class="result-title">礼物链接已生成</div>
+      <div id="gift-link" class="result-link"></div>
+      <div class="result-actions">
+        <button id="copy-link" class="ghost-btn" type="button">复制链接</button>
+        <button id="open-receiver" class="ghost-btn" type="button">打开接收页</button>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast"></div>
+  <script type="module" src="./assets/js/creator.js?v=20260106"></script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>情绪礼物 - 接收端</title>
+  <link rel="stylesheet" href="./assets/css/base.css">
+  <link rel="stylesheet" href="./assets/css/receiver.css">
+</head>
+<body>
+  <main class="container">
+    <section id="loading" class="state">正在加载礼物...</section>
+    <section id="error" class="state hidden">礼物不存在或已过期。</section>
+
+    <section id="content" class="content hidden">
+      <header class="header">
+        <h1 class="title">一份为你准备的礼物</h1>
+        <p class="subtitle">轻触开启并聆听</p>
+      </header>
+
+      <div class="gift-card">
+        <div id="overlay" class="overlay">轻触开启</div>
+        <p id="message" class="message"></p>
+        <div class="scene-info">
+          <span id="scene-badge" class="scene-badge"></span>
+          <span id="start-at" class="start-at"></span>
+        </div>
+        <div class="music-box">
+          <div class="music-label">背景音乐</div>
+          <div id="music-track" class="music-track">加载中...</div>
+        </div>
+        <div id="player" class="player hidden">
+          <div class="progress">
+            <div id="progress-bar" class="progress-bar"></div>
+          </div>
+          <div class="time">
+            <span id="current-time">00:00</span>
+            <span id="total-time">00:00</span>
+          </div>
+        </div>
+        <audio id="gift-audio" preload="auto"></audio>
+      </div>
+
+      <div class="feedback">
+        <button id="ack-btn" class="ghost-btn" type="button">我听完了</button>
+        <button id="like-btn" class="ghost-btn" type="button">我很喜欢</button>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast"></div>
+  <script type="module" src="./assets/js/receiver.js"></script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+﻿:root {
+  --bg: #101820;
+  --card: rgba(255, 255, 255, 0.08);
+  --card-border: rgba(255, 255, 255, 0.12);
+  --text: #f5f7fa;
+  --muted: rgba(255, 255, 255, 0.7);
+  --accent: #41b3ff;
+  --accent-strong: #1f88e5;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: radial-gradient(circle at top, #1f2b38, #0f1621 60%);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+.container {
+  width: min(520px, 92vw);
+  margin: 0 auto;
+  padding: 24px 0 40px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.title {
+  font-size: 24px;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 18px;
+  margin-bottom: 18px;
+}
+
+.primary-btn,
+.ghost-btn,
+.record-btn,
+.link-btn,
+.tab,
+.scene {
+  font: inherit;
+  border: none;
+  cursor: pointer;
+}
+
+.primary-btn {
+  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+  color: #fff;
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.primary-btn.wide {
+  width: 100%;
+}
+
+.ghost-btn {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+  padding: 10px 12px;
+  border-radius: 10px;
+}
+
+.link-btn {
+  background: none;
+  color: var(--accent);
+  text-decoration: underline;
+  font-size: 12px;
+  margin-top: 6px;
+}
+
+.hidden {
+  display: none;
+}
+
+.toast {
+  position: fixed;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 13px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.toast.show {
+  opacity: 1;
+}

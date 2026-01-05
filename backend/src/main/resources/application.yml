@@ -1,0 +1,37 @@
+﻿server:
+  port: 8080
+
+spring:
+  application:
+    name: music-wise
+  config:
+    import: optional:classpath:application-local.yml
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 25MB
+
+asr:
+  ffmpeg-path: ${FFMPEG_PATH:ffmpeg}
+  xfyun:
+    app-id: ${XFYUN_APP_ID:}
+    api-key: ${XFYUN_API_KEY:}
+    api-secret: ${XFYUN_API_SECRET:}
+
+tts:
+  provider: ${TTS_PROVIDER:baidu}
+  baidu:
+    api-key: ${BAIDU_TTS_API_KEY:}
+    secret-key: ${BAIDU_TTS_SECRET_KEY:}
+    cuid: ${TTS_CUID:music_wise_app}
+    per: ${TTS_PER:1}
+    spd: ${TTS_SPD:5}
+    pit: ${TTS_PIT:5}
+    vol: ${TTS_VOL:5}
+    aue: ${TTS_AUE:3}
+
+doubao:
+  music:
+    base-url: ${DOUBAO_MUSIC_BASE_URL:https://ark.cn-beijing.volces.com/api/v3/chat/completions}
+    api-key: ${DOUBAO_MUSIC_API_KEY:}
+    model: ${DOUBAO_MUSIC_MODEL:ep-20251230101646-9pck8}
